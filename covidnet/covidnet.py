@@ -62,6 +62,11 @@ class Covidnet(ChrisApp):
         Define the CLI arguments accepted by this plugin app.
         Use self.add_argument to specify a new app argument.
         """
+        self.add_argument('--parInst',
+        	        dest      = 'parInst',
+        	        type      = str,
+        	        optional  = False,
+        	        help      = 'Parent instance ID',)
         self.add_argument('--metaname', 
                     dest         = 'metaname', 
                     type         = str, 
