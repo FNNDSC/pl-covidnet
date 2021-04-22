@@ -166,6 +166,7 @@ class Inference():
         print("Creating severity.json in {}...".format(nPath))
         with open('{}/severity.json'.format(nPath, self.args.modelused), 'w') as f:
             json.dump(severityScores, f, indent=4)
+    
 
 
     
