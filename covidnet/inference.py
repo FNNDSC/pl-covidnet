@@ -131,9 +131,27 @@ class Inference():
     def generate_output_files(self, classification_data, severityScores):
         # remove this line to display model names mapped in dict
         self.args.modelused = 'default'
-        directory = self.args.parInst
+        directory = self.args.savToDir
+        print("directory name", directory)
         parent_dir = self.args.outputdir
         
+        if(directory == ''):
+            print("directory is null")
+            print("Creating prediction.json in {}...".format(self.args.outputdir))
+            with open('{}/prediction-{}.json'.format(self.args.outputdir, self.args.modelused), 'w') as f:
+                json.dump(classification_data, f, indent=4)
+            print("Copying over the input image to: {}...".format(self.args.outputdir))
+            shutil.copy(self.args.inputdir + '/' + self.args.imagefile,self.args.outputdir)
+            # Not covid positive
+            if severityScores is None:
+                return
+            print("Creating severity.json in {}...".format(self.args.outputdir))
+            with open('{}/severity.json'.format(self.args.outputdir), 'w') as f:
+                json.dump(severityScores, f, indent=4)
+            return
+
+        
+
         nPath = os.path.join(parent_dir , directory)
         os.makedirs(nPath)
 	
@@ -148,21 +166,13 @@ class Inference():
         print("Copying over the input image to: {}...".format(nPath))
         shutil.copy(self.args.inputdir + '/' + self.args.imagefile,nPath)
         
-        print("Creating prediction.json in {}...".format(self.args.outputdir))
-        with open('{}/prediction-{}.json'.format(self.args.outputdir, self.args.modelused), 'w') as f:
-            json.dump(classification_data, f, indent=4)
         
-        print("Copying over the input image to: {}...".format(self.args.outputdir))
-        shutil.copy(self.args.inputdir + '/' + self.args.imagefile,self.args.outputdir)
 
         # Not covid positive
         if severityScores is None:
           return
         
-        print("Creating severity.json in {}...".format(self.args.outputdir))
-        with open('{}/severity.json'.format(self.args.outputdir), 'w') as f:
-            json.dump(severityScores, f, indent=4)
-
+        
         print("Creating severity.json in {}...".format(nPath))
         with open('{}/severity.json'.format(nPath, self.args.modelused), 'w') as f:
             json.dump(severityScores, f, indent=4)
