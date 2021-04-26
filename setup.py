@@ -6,7 +6,7 @@ with open(path.join(path.dirname(path.abspath(__file__)), 'README.rst')) as f:
 
 setup(
     name             =   'covidnet',
-    version          =   '0.3.1',
+    version          =   '0.3.2',
     description      =   'Plugin to ChRIS for covidnet functionalities',
     long_description =   readme,
     author           =   'Jeffer Peng',
