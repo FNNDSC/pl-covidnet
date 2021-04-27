@@ -132,11 +132,10 @@ class Inference():
         # remove this line to display model names mapped in dict
         self.args.modelused = 'default'
         directory = self.args.savToDir
-        print("directory name", directory)
+        
         parent_dir = self.args.outputdir
         
         if(directory == ''):
-            print("directory is null")
             print("Creating prediction.json in {}...".format(self.args.outputdir))
             with open('{}/prediction-{}.json'.format(self.args.outputdir, self.args.modelused), 'w') as f:
                 json.dump(classification_data, f, indent=4)
