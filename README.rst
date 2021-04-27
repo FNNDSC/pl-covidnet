@@ -77,8 +77,29 @@ Run
 .. code:: bash
 
     docker run --rm -v $PWD/in:/incoming -v $PWD/out:/outgoing    \
-        fnndsc/pl-covidnet:0.2.0 covidnet                         \
+        fnndsc/pl-covidnet covidnet                         \
                --imagefile ex-covid.jpeg /incoming /outgoing
+
+.. code:: bash
+
+    docker run --rm -u $(id -u)                                         \
+        -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing                  \
+        fnndsc/pl-covidnet covidnet  --parInst <insert ID>   \
+        /incoming /outgoing
+
+.. code:: bash
+
+    docker run --rm -u $(id -u)                                         \
+        -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing                  \
+        jonocameron/pl-covidnet covidnet --imagefile "ex-covid.jpeg" --savToDir "000"   \
+        /incoming /outgoing
+
+.. code:: bash
+
+    docker run --rm -u $(id -u)                                         \
+        -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing                  \
+        jonocameron/pl-covidnet covidnet --imagefile "ex-covid.jpeg"    \
+        /incoming /outgoing
 
 
 Links
